@@ -1,0 +1,34 @@
+#!/bin/bash
+
+todo_file="todo.txt"
+
+while true; do
+  echo "To-Do List Options:"
+  echo "1. Add Task"
+  echo "2. View Tasks"
+  echo "3. Remove Task"
+  echo "4. Exit"
+  read -p "Choose an option: " option
+
+  case $option in
+     # Add a task
+      read -p "Enter task: " task
+      echo "$task" >> $todo_file
+      echo "Task added."
+      ;;
+     # View tasks
+      echo "Tasks:"
+      cat $todo_file
+      ;;
+     # Remove a task
+      read -p "Enter task to remove: " task
+      grep -v "$task" $todo_file > temp && mv temp $todo_file
+      echo "Task removed."
+      ;;
+     # Exit the script
+      echo "Goodbye!"
+      break
+      ;;
+    echo "Invalid option.";;
+  esac
+done
